@@ -1,9 +1,373 @@
-@import 'tailwindcss';
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+/* ===== Palet KursusKu (teal + emas) ===== */
+:root {
+    --kk-main: #0f766e;
+    --kk-main-light: #14b8a6;
+    --kk-main-dark: #115e59;
+    --kk-deep: #0b2f2c;
+    --kk-soft: #ccfbf1;
+    --kk-accent: #fbbf24;
+    --kk-accent-dark: #f59e0b;
+    --kk-ink: #10302c;
+    --kk-muted: #5f7a75;
+    --kk-bg: #f4f8f7;
+    --kk-border: #dbe8e4;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --bs-body-font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--kk-bg);
+    color: var(--kk-ink);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+}
+
+.alert {
+    border: 0;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* ===== Navbar ===== */
+.kk-navbar {
+    background: var(--kk-deep);
+    border-bottom: 3px solid var(--kk-accent);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+}
+
+.kk-brand-dot { color: var(--kk-accent); }
+
+.kk-navbar .navbar-nav .nav-link {
+    padding: 0.4rem 0;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.kk-navbar .navbar-nav .nav-link:hover { color: #fff; }
+
+.kk-navbar .navbar-nav .nav-link.active {
+    color: #fff;
+    border-bottom-color: var(--kk-accent);
+}
+
+/* ===== Tombol ===== */
+.btn-kk,
+.btn-kk-outline,
+.btn-kk-accent {
+    --bs-btn-padding-x: 1.8rem;
+    --bs-btn-padding-y: 0.9rem;
+    --bs-btn-border-radius: 10px;
+    --bs-btn-font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s, color 0.15s,
+                background-color 0.15s, border-color 0.15s;
+}
+
+/* Tombol emas (Daftar Kursus) */
+.btn-kk-accent {
+    --bs-btn-padding-x: 2rem;
+    --bs-btn-padding-y: 0.95rem;
+    --bs-btn-font-weight: 800;
+    --bs-btn-color: var(--kk-deep);
+    --bs-btn-bg: var(--kk-accent);
+    --bs-btn-border-color: var(--kk-accent);
+    --bs-btn-hover-color: var(--kk-deep);
+    --bs-btn-hover-bg: var(--kk-accent-dark);
+    --bs-btn-hover-border-color: var(--kk-accent-dark);
+    --bs-btn-active-color: var(--kk-deep);
+    --bs-btn-active-bg: var(--kk-accent-dark);
+    --bs-btn-active-border-color: var(--kk-accent-dark);
+    box-shadow: 0 10px 24px rgba(245, 158, 11, 0.45);
+}
+
+.btn-kk-accent::after {
+    content: "\2192";
+    display: inline-block;
+    margin-left: 0.6rem;
+    transition: transform 0.2s;
+}
+
+.btn-kk-accent:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px rgba(245, 158, 11, 0.55);
+}
+
+.btn-kk-accent:hover::after { transform: translateX(4px); }
+
+/* Tombol teal (utama) */
+.btn-kk {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--kk-main);
+    --bs-btn-border-color: var(--kk-main);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--kk-main-dark);
+    --bs-btn-hover-border-color: var(--kk-main-dark);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--kk-main-dark);
+    --bs-btn-active-border-color: var(--kk-main-dark);
+    box-shadow: 0 8px 20px rgba(15, 118, 110, 0.28);
+}
+
+.btn-kk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(15, 118, 110, 0.35);
+}
+
+/* Tombol outline (Lihat Kursus) */
+.btn-kk-outline {
+    --bs-btn-color: var(--kk-main);
+    --bs-btn-bg: #fff;
+    --bs-btn-border-color: var(--kk-main);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--kk-main);
+    --bs-btn-hover-border-color: var(--kk-main);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--kk-main-dark);
+    --bs-btn-active-border-color: var(--kk-main-dark);
+    border-width: 2px;
+}
+
+.btn-kk-outline:hover { transform: translateY(-2px); }
+
+/* ===== Hero ===== */
+.kk-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 5.5rem 0;
+    background:
+        radial-gradient(circle at 92% 8%, rgba(251, 191, 36, 0.2), transparent 42%),
+        radial-gradient(circle at 4% 92%, rgba(20, 184, 166, 0.16), transparent 42%),
+        #fff;
+    border-bottom: 1px solid var(--kk-border);
+}
+
+.kk-eyebrow {
+    display: block;
+    margin-bottom: 1.2rem;
+    color: var(--kk-main);
+    font-size: 0.88rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.kk-eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 3px;
+    margin-right: 0.7rem;
+    vertical-align: middle;
+    background: var(--kk-accent);
+    border-radius: 2px;
+}
+
+.kk-hero h1 {
+    margin-bottom: 1.4rem;
+    color: var(--kk-deep);
+    font-size: clamp(2.3rem, 4.8vw, 3.7rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+}
+
+/* Sorotan emas seperti stabilo */
+.kk-hl {
+    padding: 0 0.1em;
+    background: linear-gradient(transparent 62%, rgba(251, 191, 36, 0.6) 62%);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.kk-hero-text {
+    max-width: 600px;
+    margin-bottom: 2.2rem;
+    color: var(--kk-muted);
+    font-size: 1.12rem;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+/* Baris poin kecil */
+.kk-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    margin-top: 2.6rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--kk-border);
+}
+
+.kk-point strong {
+    display: block;
+    color: var(--kk-main);
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.kk-point span {
+    color: var(--kk-muted);
+    font-size: 0.85rem;
+}
+
+/* Foto hero dengan bingkai emas */
+.kk-hero-visual { position: relative; }
+
+.kk-hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--kk-accent), var(--kk-accent-dark));
+}
+
+/* Foto tampil utuh: TANPA object-fit / aspect-ratio supaya tidak terpotong */
+.kk-hero-img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 5px solid #fff;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(11, 47, 44, 0.25);
+}
+
+/* ===== Section Kursus Pilihan ===== */
+#kursus { scroll-margin-top: 90px; }
+
+.kk-section-title {
+    margin-bottom: 0.4rem;
+    color: var(--kk-deep);
+    font-size: 2.1rem;
+    font-weight: 800;
+}
+
+.kk-section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin-top: 0.7rem;
+    background: var(--kk-accent);
+    border-radius: 2px;
+}
+
+.kk-section-sub {
+    margin-bottom: 2.2rem;
+    color: var(--kk-muted);
+    font-weight: 500;
+}
+
+.kk-course-card {
+    height: 100%;
+    padding: 1.7rem;
+    background: #fff;
+    border: 1px solid var(--kk-border);
+    border-top: 4px solid var(--kk-main);
+    border-radius: 12px;
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.kk-course-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 34px rgba(15, 118, 110, 0.16);
+}
+
+.kk-course-code {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: var(--kk-deep);
+    color: var(--kk-accent);
+    border-radius: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.kk-course-card h3 {
+    margin: 1rem 0 0.5rem;
+    color: var(--kk-deep);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.kk-course-card p {
+    margin: 0;
+    color: var(--kk-muted);
+}
+
+/* ===== Form pendaftaran ===== */
+.kk-card {
+    border: 1px solid var(--kk-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 36px rgba(15, 118, 110, 0.12);
+}
+
+.kk-card-header {
+    padding: 1.9rem 2rem;
+    background: var(--kk-deep);
+    border-bottom: 3px solid var(--kk-accent);
+    color: #fff;
+}
+
+.kk-card-header p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.kk-card .form-label {
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+.kk-card .form-control,
+.kk-card .form-select {
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border-color: #cfe0db;
+}
+
+.kk-card .form-control:focus,
+.kk-card .form-select:focus {
+    border-color: var(--kk-main-light);
+    box-shadow: 0 0 0 0.25rem rgba(20, 184, 166, 0.18);
+}
+
+.kk-availability { font-weight: 600; }
+
+/* ===== Footer ===== */
+.kk-footer {
+    padding: 1.6rem 0;
+    background: var(--kk-deep);
+    border-top: 3px solid var(--kk-accent);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.kk-footer strong { color: var(--kk-accent); }
+
+/* ===== Responsif ===== */
+@media (max-width: 991.98px) {
+    .kk-hero { padding: 3.2rem 0; }
 }

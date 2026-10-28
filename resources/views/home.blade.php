@@ -1,83 +1,77 @@
-<!doctype html>
-<html lang="id">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $siteName }}</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
+@extends('layouts.app')
 
-<header class="navbar">
+@section('title', 'KursusKu - Bangun Skill Web Bersama KursusKu')
+
+@section('content')
+
+{{-- ===== Hero ===== --}}
+<section class="kk-hero">
     <div class="container">
-        <a href="{{ route('home') }}" class="brand">
-            <span class="brand-logo">{{ substr($siteName, 0, 1) }}</span>
-            {{ $siteName }}
-        </a>
-        <nav>
-            <a href="{{ route('home') }}" class="nav-link">Beranda</a>
-            <a href="#kursus" class="nav-link">Kursus</a>
-        </nav>
-    </div>
-</header>
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <span class="kk-eyebrow">Belajar Web Lebih Terarah</span>
 
-<main>
-    <section class="hero">
-        <div class="container hero-inner">
-            <div>
-                <span class="hero-badge">Belajar Web Secara Bertahap</span>
-                <h1>Bangun kemampuan web dari <span class="highlight">PHP sampai Laravel.</span></h1>
-                <p class="hero-text">KursusKu menyediakan latihan terarah untuk pemula.</p>
-                <a href="#kursus" class="btn btn-accent">Lihat Kursus</a>
+                <h1>Bangun Skill Web Bersama <span class="kk-hl">KursusKu</span></h1>
 
-                <div class="hero-stats">
-                    <div class="stat">
-                        <strong>{{ count($featured) }}</strong>
+                <p class="kk-hero-text">
+                    Pelajari langkah demi langkah dari konsep dasar HTML, CSS,
+                    logika pemrograman PHP, hingga arsitektur modern
+                    menggunakan Laravel framework.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ route('enrollments.create') }}" class="btn btn-kk-accent">Daftar Kursus</a>
+                    <a href="#kursus" class="btn btn-kk-outline">Lihat Kursus</a>
+                </div>
+
+                <div class="kk-points">
+                    <div class="kk-point">
+                        <strong>{{ count($featured ?? []) }}</strong>
                         <span>Kursus Pilihan</span>
                     </div>
-                    <div class="stat">
-                        <strong>MVC</strong>
-                        <span>Struktur Terarah</span>
+                    <div class="kk-point">
+                        <strong>Bertahap</strong>
+                        <span>Dari dasar sampai Laravel</span>
                     </div>
-                    <div class="stat">
-                        <strong>Pemula</strong>
-                        <span>Ramah untuk Semua</span>
+                    <div class="kk-point">
+                        <strong>Tanpa Reload</strong>
+                        <span>Cek kursi lewat Ajax</span>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <img src="{{ asset('images/hero-kursus.jpg') }}"
-                     alt="Ilustrasi kelas KursusKu">
+            <div class="col-lg-5">
+                <div class="kk-hero-visual">
+                    <img src="{{ asset('images/hero-kursus.jpg') }}"
+                         alt="Ilustrasi kelas KursusKu"
+                         class="kk-hero-img">
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section container" id="kursus">
-        <div class="section-head">
-            <span class="section-eyebrow">Program Kami</span>
-            <h2 class="section-title">Kursus Pilihan</h2>
-            <p class="section-subtitle">Mulai dari dasar sampai framework, langkah demi langkah.</p>
-        </div>
+{{-- ===== Kursus Pilihan (data dari HomeController) ===== --}}
+<section class="py-5" id="kursus">
+    <div class="container">
+        <h2 class="kk-section-title">Kursus Pilihan</h2>
+        <p class="kk-section-sub">
+            Materi terstruktur yang dirancang bertahap untuk mahasiswa dan pemula.
+        </p>
 
-        <div class="course-grid">
-            @foreach ($featured as $course)
-                <article class="card">
-                    <div class="card-number">{{ $loop->iteration }}</div>
-                    <span class="card-code">{{ $course['code'] }}</span>
-                    <h3>{{ $course['name'] }}</h3>
-                    <p>{{ $course['description'] }}</p>
-                </article>
+        <div class="row g-4">
+            @foreach (($featured ?? []) as $course)
+                <div class="col-md-6 col-lg-4">
+                    <article class="kk-course-card">
+                        <span class="kk-course-code">{{ $course['code'] }}</span>
+                        <h3>{{ $course['name'] }}</h3>
+                        <p>{{ $course['description'] }}</p>
+                    </article>
+                </div>
             @endforeach
         </div>
-    </section>
-</main>
-
-<footer class="footer">
-    <div class="container">
-        &copy; {{ date('Y') }} <strong>{{ $siteName }}</strong> · Praktikum Pemrograman Web III
+    
     </div>
-</footer>
+</section>
 
-</body>
-</html>
+@endsection
